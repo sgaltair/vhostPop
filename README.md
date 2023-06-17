@@ -1,4 +1,5 @@
-# Compose File Vhost Creator
+# VHost Pop
+### Compose File Vhost Creator With Linode API Integration
 
 This image is designed to be run alongside the nginxproxy/nginx-proxy Docker container. It recursively checks a target directory for compose files with a VIRTUAL_HOST environment variable and creates the corresponding vhost file in the target vhost directory. It also has the option to create a Linode domain record if the `LINODE_INTEGRATION` flag is set to `True`.
 
@@ -6,15 +7,13 @@ This image is designed to be run alongside the nginxproxy/nginx-proxy Docker con
 
 A default config file has been provided to you. Please copy this file from `defaultConfig.py` to `vhostPopConfig.py` and edit it.
 
-1. Make sure you have the necessary prerequisites installed.
-2. Set the `LINODE_INTEGRATION` flag to `True` if you want to enable Linode domain record creation. Set it to `False` if not needed.
-    - If you do choose Linode API integration:
-      - You'll need to create a personal access token.
-      - You'll need to set the appropriate variables in `vhostPopConfig`.
-3. Run the script.
+### Docker run
+Example:
+
+`docker run --name vhostPop -d -v /path/to/containers/tree:/app/containers -v /path/to/vhost.d:/app/containers/nginx/vhost.d -v /path/to/vhostPopConfig.py:/app/vhostPop/vhostPopConfig.py`
 
 ### Docker compose
-A sample compose file has been provided. 
+A sample compose file has been provided. After editing it with the appropriate mounts, simply run `docker compose up -d`.
 
 ## Functionality
 - Writes the default initial host file if it doesn't exist.
