@@ -1,8 +1,9 @@
 .vscode
 **/vhostPopConfig.py
-**/.log
+**.log
 *Env.py
 *.env
+
 
 # Byte-compiled / optimized / DLL files
 __pycache__/
