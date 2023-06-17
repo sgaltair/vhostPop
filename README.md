@@ -24,5 +24,5 @@ A sample compose file has been provided. After editing it with the appropriate m
 ## Functionality
 - Writes the default initial host file if it doesn't exist.
 - Checks for the `VIRTUAL_HOST` environment variable in all found compose files.
-- If a `VIRTUAL_HOST` is present and the corresponding vhost file doesn't exist, it creates it using the default.
+- If a `VIRTUAL_HOST` is present and the corresponding vhost file doesn't exist, it creates it by copying the default.
 - If `LINODE_INTEGRATION` is enabled, it attempts to create the Linode domain record for the vhost.
