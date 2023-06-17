@@ -10,7 +10,12 @@ A default config file has been provided to you. Please copy this file from `defa
 ### Docker run
 Example:
 
-`docker run --name vhostPop -d -v /path/to/containers/tree:/app/containers -v /path/to/vhost.d:/app/containers/nginx/vhost.d -v /path/to/vhostPopConfig.py:/app/vhostPop/vhostPopConfig.py`
+```
+docker run --name vhostPop -d \ 
+-v /path/to/containers/tree:/app/containers \
+-v /path/to/vhost.d:/app/containers/nginx/vhost.d \
+-v /path/to/vhostPopConfig.py:/app/vhostPop/vhostPopConfig.py
+```
 
 ### Docker compose
 A sample compose file has been provided. After editing it with the appropriate mounts, simply run `docker compose up -d`.
