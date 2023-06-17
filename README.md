@@ -14,6 +14,13 @@ The app assumes a directory structure like this:
    |-containers
    |---nginx
    |-----vhost.d
+   |---container1
+   |-----compose.yml
+   |---container3
+   |-----compose.yml
+   |---container3
+   |-----compose.yml
+   
 ```
 
 Where `containers` is where you mount `/app/containers`.
