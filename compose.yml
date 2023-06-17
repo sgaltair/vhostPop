@@ -1,0 +1,9 @@
+services:
+  vhostPop:
+    container_name: vhostPop
+    hostname: vhostPop
+    image: isame/vhostpop
+    volumes:
+      - /path/to/containers/tree:/app/containers
+      - /path/to/vhost.d:/app/containers/nginx/vhost.d
+      - /path/to/vhostPopConfig.py:/app/vhostPop/vhostPopConfig.py
