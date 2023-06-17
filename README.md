@@ -3,17 +3,6 @@
 
 This image is designed to be run alongside the nginxproxy/nginx-proxy Docker container. It recursively checks a target directory for compose files with a VIRTUAL_HOST environment variable and creates the corresponding vhost file in the target vhost directory. It also has the option to create a Linode domain record if the `LINODE_INTEGRATION` flag is set to `True`.
 
-## Prerequisites
-
-- This script requires the following Python modules to be installed:
-  - `pathlib`
-  - `re`
-  - `shutil`
-  - `datetime`
-  - `os`
-  - `vhostPopConfig` (imported from external module)
-  - `linodeRecordCreate` (imported from external module)
-
 ## Usage
 
 A default config file has been provided to you. Please copy this file from `defaultConfig.py` to `vhostPopConfig.py` and edit it.
