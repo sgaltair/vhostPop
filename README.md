@@ -7,12 +7,28 @@ This image is designed to be run alongside the nginxproxy/nginx-proxy Docker con
 
 A default config file has been provided to you. Please copy this file from `defaultConfig.py` to `vhostPopConfig.py` and edit it.
 
+### Directory structure
+The app assumes a directory structure like this:
+```
+   .
+   |-containers
+   |---nginx
+   |-----vhost.d
+```
+
+Where `containers` is where you mount `/app/containers`.
+
+It will find **all** docker-compose.yml or compose.yml files in all directories under this path. 
+
+***The script searches for a string matching `VIRTUAL_HOST=` in compose files.***
+On the off chance this string exists for other purposes in any of your compose files, this will break things.
+
 ### Docker run
 Example:
 
 ```
 docker run --name vhostPop -d \ 
--v /path/to/containers/tree:/app/containers \
+-v /path/to/containers:/app/containers \
 -v /path/to/vhost.d:/app/containers/nginx/vhost.d \
 -v /path/to/vhostPopConfig.py:/app/vhostPop/vhostPopConfig.py \
 isame/vhostpop:latest
