@@ -1,4 +1,4 @@
-# VHost Pop
+# Vhost Pop
 ### Compose File Vhost Creator With Linode API Integration
 
 This image is designed to be run alongside the nginxproxy/nginx-proxy Docker container. It recursively checks a target directory for compose files with a VIRTUAL_HOST environment variable and creates the corresponding vhost file in the target vhost directory. It also has the option to create a Linode domain record if the `LINODE_INTEGRATION` flag is set to `True`.
