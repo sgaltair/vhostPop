@@ -5,7 +5,6 @@ from vhostPopConfig import *
 baseUrl = "https://api.linode.com/v4"
 headers = {"Authorization": f"Bearer {API_KEY}", "Content-type": "application/json"}
 
-
 def createRecord(recordName: str, recordType: str):
     # Creates a domain record of the specified name and type, if it doesn't exist.
     newRecord = {
