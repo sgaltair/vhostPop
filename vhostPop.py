@@ -79,8 +79,11 @@ def main():
         for file in files:
             with open(file.as_posix()) as f:
                 currentFile = f.read()
+                currentFile = currentFile.split('\n')
+            
+            matchingLine = [currentFile[x] for x in range(len(currentFile)) if 'VIRTUAL HOST' in currentFile[x] and '#' not in currentFile[x]]
 
-            rgx = re.search("(?<=VIRTUAL_HOST=).+", currentFile)
+            rgx = re.search("(?<=VIRTUAL_HOST=).+", matchingLine)
             if rgx:
                 if (not Path(f"../{VHOSTD_PATH}/{rgx[0]}").is_file()) and (
                     rgx[0] != "DEFAULT_HOST"
