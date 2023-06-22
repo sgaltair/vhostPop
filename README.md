@@ -29,6 +29,9 @@ It will find **all** docker-compose.yml or compose.yml files in all directories 
 
 ***The script searches for a string matching `VIRTUAL_HOST=` in compose files.***
 On the off chance this string exists for other purposes in any of your compose files, this will break things.
+This script will ignore lines with a `#`.
+
+Another note to add: There is no functionality built to remove vhosts as of this version. This may be added in the future if I see a good use for it.
 
 ### Docker run
 Example:

@@ -8,9 +8,9 @@ LINODE_INTEGRATION = False
 if LINODE_INTEGRATION == True:
     API_KEY = ""  # Your personal access token from Linode
     DOMAIN_ID = 2278333  # You can find this in the url on the domains page for a domain: https://cloud.linode.com/domains/#######
-    TARGET_IP = ""  # The IP of the target host (probably the IP of your Linode server)
+    TARGET_IP = ""  # The IP of the target host (probably the IP of your Linode server) NOT the domain name.
 
-# You probably want to leave these alone, as they're integral to the function of the scripts. 
+# You probably want to leave these alone, as they're integral to the function of the scripts.
 # Paths should be relative to the parent directory. All paths are addressed as ../PATH
 CONTAINERS_PATH = "containers"
 VHOSTD_PATH = "containers/nginx/vhost.d"
