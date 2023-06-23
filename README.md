@@ -27,7 +27,7 @@ Where `containers` is where you mount `/app/containers`.
 
 It will find **all** docker-compose.yml or compose.yml files in all directories under this path. 
 
-***The script searches for a string matching `VIRTUAL_HOST=` in compose files.***
+***The script searches for a string matching `VIRTUAL_HOST=` or `VIRTUAL HOST:` in compose files.***
 On the off chance this string exists for other purposes in any of your compose files, this will break things.
 This script will ignore lines with a `#`.
 

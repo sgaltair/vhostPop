@@ -10,7 +10,7 @@ from linodeRecordCreate import *
 # Checks target directory recursively for compose files with a VIRTUAL_HOST environment variable and creates
 # the corresponding vhost file in the target vhost directory.
 # Written to be run alongside nginxproxy/nginx-proxy from https://hub.docker.com/r/nginxproxy/nginx-proxy.
-# I run it as a cron job to automate new host creation 
+# I run it as a cron job to automate new host creation
 
 # If LINODE_INTEGRATION is set to True, also attempts to create the domain record.
 
@@ -79,31 +79,42 @@ def main():
         for file in files:
             with open(file.as_posix()) as f:
                 currentFile = f.read()
-                currentFile = currentFile.split('\n')
-            matchingLine = [currentFile[x] for x in range(len(currentFile)) if 'VIRTUAL_HOST' in currentFile[x] and '#' not in currentFile[x]]
+                currentFile = currentFile.split("\n")
+            matchingLine = [
+                currentFile[x]
+                for x in range(len(currentFile))
+                if "VIRTUAL_HOST" in currentFile[x] and "#" not in currentFile[x]
+            ]
             if matchingLine:
-                rgx = re.search("(?<=VIRTUAL_HOST=).+", matchingLine[0])
-                if (not Path(f"../{VHOSTD_PATH}/{rgx[0]}").is_file()) and (
-                    rgx[0] != "DEFAULT_HOST"
+                rgxEquals = re.search("(?<=VIRTUAL_HOST=).+", matchingLine[0])
+                rgxColon = re.search("(?<=VIRTUAL_HOST:).+", matchingLine[0])
+                if rgxEquals:
+                    rgx = rgxEquals
+                elif rgxColon:
+                    rgx = rgxColon
+
+                if (not Path(f"../{VHOSTD_PATH}/{rgx[0].strip()}").is_file()) and (
+                    rgx[0].strip() != "DEFAULT_HOST"
                 ):
                     try:
                         shutil.copy(
                             f"../{VHOSTD_PATH}/{DEFAULT_HOST}",
-                            f"../{VHOSTD_PATH}/{rgx[0]}",
+                            f"../{VHOSTD_PATH}/{rgx[0].strip()}",
                         )
                     except Exception as e:
                         writeLog("error", f"{e.args[0]}")
                     else:
-                        writeLog("info", f"{rgx[0]} created.")
+                        writeLog("info", f"{rgx[0].strip()} created.")
                     if LINODE_INTEGRATION:
-                        if not createRecord(rgx[0].split(".")[0], "A"):
+                        if not createRecord(rgx[0].strip().split(".")[0], "A"):
                             writeLog(
                                 "error",
-                                f"Vhost {rgx[0]} created, but Linode record creation failed.",
+                                f"Vhost {rgx[0].strip()} created, but Linode record creation failed.",
                             )
                         else:
                             writeLog(
-                                "info", f"Successfully created {rgx[0]} domain record."
+                                "info",
+                                f"Successfully created {rgx[0].strip()} domain record.",
                             )
 
     except Exception as e:
